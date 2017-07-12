@@ -17,7 +17,7 @@
  - [Board 관련 API 예외처리 구현] [O]
  - [기존의 json 유틸 클래스를 어떻게 ? 핸들러?...] [O]
   -> 매니저 클래스로 구현
- - [Logging 설정] [X]
+ - [Logging 설정] [O]
    참고 : http://java.ihoney.pe.kr/397
  
  # 20170620

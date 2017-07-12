@@ -1,4 +1,0 @@
-[2017-06-27 01:47:59] [http-nio-8080-exec-4] ERROR c.j.b.a.m.service.MemberServiceImpl - 멤버 데이터 삽입에 실패했습니다.
-[2017-06-27 01:47:59] [http-nio-8080-exec-4] ERROR c.j.b.a.m.service.MemberServiceImpl - ID or Token 값 중복
-[2017-06-27 01:47:59] [http-nio-8080-exec-4] ERROR c.j.b.a.m.service.MemberServiceImpl - ID : jje9302
-[2017-06-27 01:47:59] [http-nio-8080-exec-4] ERROR c.j.b.a.m.service.MemberServiceImpl - Token : dNaNPViHbO8:APA91bH2zBn865umFF1JQli3o_qZHMIcwGH_m_dRwXiOPaO13BO5zn4knHN_uwm9vGt_5roCVZCN_bh2pqkXzoYsiKF1OqLwCykEOWRo7U5o8E-t1Kqza6N2ZvzYLErDbxZBVcS46-VO

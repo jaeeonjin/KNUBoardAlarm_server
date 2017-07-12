@@ -1,4 +1,8 @@
 
+* 개발 관련 참고
+ : http://jojoldu.tistory.com/43#%EA%B0%84%ED%8E%B8%ED%95%9C-%EC%84%A4%EC%A0%95
+ : 서버 재시작 없이 개발 -> spring-loaded ??
+
  ## 개발 일지 ##
  
  # 20160616 
@@ -31,4 +35,6 @@
  - 테스트 작업 중 오류 발견
   : 오류 >> Unexpected token END OF FILE at position 0.
   : 원인 >> 매번 같은 파일리더 객체
+  
+
  
