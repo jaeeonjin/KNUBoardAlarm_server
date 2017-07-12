@@ -1,0 +1,34 @@
+
+ ## 개발 일지 ##
+ 
+ # 20160616 
+ - MySQL, MyBatis 설정
+  : DB 설정 유닛 테스트 수행
+ - Member API 작성 (CRUD)
+ 
+ # 20170619
+ - Board API 작성 (CRUD)
+ - RollBack 메소드 추가 (CommonDAO)
+ - File 유틸 클래스 작성
+  : 유닛 테스트 수행
+ 
+ # 20170621
+ - 프로시저 SQL 작성
+  : boardService의 Insert 메소드 수행 후, 성공/실패 여부 반환(추가적인 SELECT 메소드 구현을 통해 설정하기 OR 프로시저 자체에서 해보기)
+ - 트리거 SQL 작성
+ - Storage 클래스 작성
+ 
+ # 20170623
+ - JsonFile 클래스 작성
+ - (미완료) FileUils 클래스에 getWatckey() 메소드 추가
+  : 메인 서비스에 쓰레드로 monitoring 시작 추가해야한다.
+ 
+ # 20170626
+ - common 패키지는 정말 공통으로 사용할 수 있는 것으로 취급하여 클래스 재배치했음(manager패키지 외부로 이동)
+ - FileWatchService, RenewalService, MainService 클래스 작성
+ 
+ # 20170628
+ - 테스트 작업 중 오류 발견
+  : 오류 >> Unexpected token END OF FILE at position 0.
+  : 원인 >> 매번 같은 파일리더 객체
+ 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	
+	<insert id="insert" parameterType="map" >
+		CALL INSERT_BOARD ( #{uri}, #{type}, #{id}, #{name}, @RESULT )
+	</insert>
+	
+	<select id="getResult" resultType="Integer">
+		SELECT @RESULT
+	</select>
+	
+	<delete id="delete" parameterType="map">
+		DELETE
+		FROM member_board
+		WHERE member_id = #{id} and board_url=#{uri}
+	</delete>
+	
+	<select id="selectOne" parameterType="map" resultType="com.jinjaeeon.boardsystem.api.board.dto.BoardDTO" >
+		SELECT *
+		FROM board_info
+		WHERE url = #{uri}
+	</select>
+	
+	<select id="selectAll" resultType="com.jinjaeeon.boardsystem.api.board.dto.BoardDTO" >
+		SELECT *
+		FROM board_info
+	</select>
+	
+</mapper>
+
+
