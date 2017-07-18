@@ -14,13 +14,13 @@
 	<delete id="delete" parameterType="map">
 		DELETE
 		FROM member_board
-		WHERE member_id = #{id} and board_url=#{uri}
+		WHERE member_id = #{id} and board_uri=#{uri}
 	</delete>
 	
 	<select id="selectOne" parameterType="map" resultType="com.jinjaeeon.boardsystem.api.board.dto.BoardDTO" >
 		SELECT *
 		FROM board_info
-		WHERE url = #{uri}
+		WHERE uri = #{uri}
 	</select>
 	
 	<select id="selectAll" resultType="com.jinjaeeon.boardsystem.api.board.dto.BoardDTO" >

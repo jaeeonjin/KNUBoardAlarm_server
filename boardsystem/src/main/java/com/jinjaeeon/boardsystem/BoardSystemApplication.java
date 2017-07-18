@@ -53,7 +53,7 @@ public class BoardSystemApplication implements CommandLineRunner  {
 				while(true) {
 					mainService.startProcess();
 					try {
-						Thread.sleep(1200000); // 30분
+						Thread.sleep(10000); // 30분
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

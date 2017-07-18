@@ -36,5 +36,8 @@
   : 오류 >> Unexpected token END OF FILE at position 0.
   : 원인 >> 매번 같은 파일리더 객체
   
+  # 20170719
+  - board_info 데이터 INSERT 오류
+   : 원인 >> type 컬럼 길이 제한 때문에 안되는 것이었다..
 
  

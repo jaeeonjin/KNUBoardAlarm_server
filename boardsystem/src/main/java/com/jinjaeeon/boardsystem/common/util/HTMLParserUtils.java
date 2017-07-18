@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author jaeeonjin
  * HTML Parsing utils.
- * Requirement : JSoup Library ( Search "jsoup" in maven repository )
+ * Requirement : JSoup Library ( add Dependency "jsoup" in pom.xml )
  */
 public class HTMLParserUtils {
 
@@ -29,7 +29,7 @@ public class HTMLParserUtils {
 			document = Jsoup.connect(url).timeout(TIME_OUT).get();
 			document.outputSettings().charset("UTF-8");
 		} catch (IOException e) {
-			log.error("웹사이트 접속 오류 : " + url);
+			log.error("Connection Error : " + url);
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}

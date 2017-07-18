@@ -33,16 +33,16 @@ public class BoardStorageManager {
 	
 	/**
 	 * Storage에서 한 개의 게시판 데이터를 가져온다.
-	 * @param url : key값으로 게시판 데이터 로딩
+	 * @param uri : key값으로 게시판 데이터 로딩
 	 * @return
 	 */
-	public BoardDTO select(String url) {
+	public BoardDTO select(String uri) {
 		BoardDTO board = null;
-		if( storage.containsKey(url) ) {
-			board = storage.get(url);
+		if( storage.containsKey(uri) ) {
+			board = storage.get(uri);
 		} else {
 			log.warn("게시판 SELECT 실패!");
-			log.warn("해당 게시판은 존재하지 않습니다 : {} ", url);
+			log.warn("해당 게시판은 존재하지 않습니다 : {} ", uri);
 		}
 		return board;
 	}
@@ -68,15 +68,15 @@ public class BoardStorageManager {
 	
 	/**
 	 * Storage에 한 개의 게시판 데이터를 삭제한다.
-	 * @param url : key값으로 게시판 데이터 삭제
+	 * @param uri : key값으로 게시판 데이터 삭제
 	 */
-	synchronized public void delete(String url) {
-		if( storage.containsKey(url) ) { 
-			storage.remove(url);
+	synchronized public void delete(String uri) {
+		if( storage.containsKey(uri) ) { 
+			storage.remove(uri);
 		}
 		else {
 			log.warn("게시판 DELETE 실패!");
-			log.warn("해당 게시판은 존재하지 않습니다 : {} ", url);
+			log.warn("해당 게시판은 존재하지 않습니다 : {} ", uri);
 		}
 	}
 

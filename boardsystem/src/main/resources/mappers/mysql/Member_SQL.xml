@@ -42,7 +42,7 @@
 		SELECT DISTINCT token, board_name as boardTitle
 		FROM member
 		INNER JOIN member_board
-		WHERE board_url = #{boardUri};
+		WHERE board_uri = #{boardUri};
 	</select> 
 	
 </mapper>

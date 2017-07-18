@@ -77,7 +77,7 @@ public class RenewalService {
 
 		// 2-2. 내부 메모리에 게시판이 존재하지 않는다면
 		else {
-			// 3. 서버 내부 메모리에 저장(파일이 추가되면 자동으로 수행)
+			// 3. 서버 내부 메모리에 저장(파일이 추가되면 자동으로 수행, filewatchservice)
 			// storageManager.insert(beforeBoard); 
 			// log.info("새로운 게시판을 [서버 메모리]에 추가했습니다.");
 		}
@@ -106,6 +106,24 @@ public class RenewalService {
 				beforeData.put(key, parsedData.get(key));
 			}
 		}
+		
+		// 메모리 상에서, beforeData에는 이미 최신정보가 기록되어있다.
+		// 하지만 기존의 beforeData에서 삭제된 데이터가 있을 수도 있다.
+		// beforeData에 존재하는 key가 parsedData에서 존재하지 않을 수 있다는 뜻.
+		// ex)
+		// 기존에 파싱된 데이터 :: A, B, C
+		// 새롭게 파싱된 데이터 :: A, B, D
+		// 알림 전송되는 데이터 : D
+		// 그렇다면 C는? 없애야한다.
+		// 아래와 같은 로직이 위 프로세스를 수행한다.
+		
+		for(String key : beforeData.keySet()) {
+			// 파싱데이터에 기존데이터의 어떤 항목이 없으면..
+			if(!parsedData.containsKey(key)) {
+				beforeData.remove(key);
+			}
+		}
+		
 	}
 
 }

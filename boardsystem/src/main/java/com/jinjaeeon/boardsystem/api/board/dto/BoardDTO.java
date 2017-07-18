@@ -1,6 +1,5 @@
 package com.jinjaeeon.boardsystem.api.board.dto;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class BoardDTO {
@@ -9,26 +8,18 @@ public class BoardDTO {
 	private String uri; // 게시판 주소
 	private String type; // 게시판 종류
 	private Map<String, String> data; // 게시판 데이터
-	
-	public BoardDTO() {} 
-	
-	public BoardDTO(String id, String name, String url, String type) {
+
+	public BoardDTO(String id, String uri) {
 		this.id = id;
-		this.name = name;
-		this.setUri(url);
-		this.setType(type);
-		this.setData(new HashMap<>());
+		this.uri = uri;
 	}
 
-	public BoardDTO(String url, String type, Map<String, String> data) {
-		this.setUri(url);
-		this.setType(type);
-		this.setData(data);
+	public BoardDTO() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public BoardDTO(String id, String url) {
-		this.id = id;
-		this.uri = url;
+
+	public String getType() {
+		return type;
 	}
 
 	public String getUri() {
@@ -38,11 +29,7 @@ public class BoardDTO {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-
-	public String getType() {
-		return type;
-	}
-
+	
 	public void setType(String type) {
 		this.type = type;
 	}

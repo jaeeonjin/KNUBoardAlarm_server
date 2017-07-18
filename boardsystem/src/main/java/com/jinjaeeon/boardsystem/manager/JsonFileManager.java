@@ -102,7 +102,7 @@ public class JsonFileManager extends FileUtils {
 		}
 
 		dto.setData((Map<String, String>) json.get("data"));
-		dto.setUri((String) json.get("url"));
+		dto.setUri((String) json.get("uri"));
 		dto.setType((String) json.get("type"));
 		return dto;
 	}
@@ -141,7 +141,7 @@ public class JsonFileManager extends FileUtils {
 	public JSONObject createJSONObject(BoardDTO board) {
 
 		JSONObject json = new JSONObject();
-		json.put("url", board.getUri());
+		json.put("uri", board.getUri());
 		json.put("type", board.getType());
 		json.put("data", board.getData());
 

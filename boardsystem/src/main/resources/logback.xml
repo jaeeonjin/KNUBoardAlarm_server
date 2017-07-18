@@ -26,7 +26,7 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<root level="ERROR">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</root>

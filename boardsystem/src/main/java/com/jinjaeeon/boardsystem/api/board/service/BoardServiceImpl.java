@@ -97,7 +97,8 @@ public class BoardServiceImpl implements BoardService {
 
 		try {
 			try {
-				result = boardDAO.insert(board);			
+				result = boardDAO.insert(board);
+				System.err.println(board);
 			} catch(Exception e) {
 				log.error("외래키 제약 조건 ERROR");
 				log.error("ID : " + board.getId() + " Board_URI : " + board.getUri() );
