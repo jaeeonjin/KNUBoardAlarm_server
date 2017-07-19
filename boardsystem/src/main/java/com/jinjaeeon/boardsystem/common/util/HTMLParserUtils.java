@@ -17,19 +17,22 @@ import org.slf4j.LoggerFactory;
  */
 public class HTMLParserUtils {
 
-	final static int TIME_OUT = 30000;
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
-	private final Logger log = LoggerFactory.getLogger(getClass()); 
-	private static String BASE_URL = "http://computer.kangwon.ac.kr/index.php?mp=";
-	
+	final static int TIME_OUT = 30000; 
+
+	/**
+	 * uri에 접속해서 document 객체를 받아온다.
+	 * @param uri
+	 * @return
+	 */
 	private Document getDocument(String uri) {
-		String url = BASE_URL + uri;
 		Document document = null;
 		try {
-			document = Jsoup.connect(url).timeout(TIME_OUT).get();
+			document = Jsoup.connect(uri).timeout(TIME_OUT).get();
 			document.outputSettings().charset("UTF-8");
 		} catch (IOException e) {
-			log.error("Connection Error : " + url);
+			log.error("Connection Error : " + uri);
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
@@ -37,23 +40,14 @@ public class HTMLParserUtils {
 	}
 	
 	/**
-	 * HTML 데이터 파싱
-	 * TITLE과 URL 데이터를 가져온다
-	 * 가져온 데이터는 KEY:LINK Value:TITLE의 형식으로 MAP에 저장, 반환 
-	 * @param url : 파싱할 웹사이트 URL
-	 * @param cssQueryTag : 파싱할 노드의 태그
+	 * 받은 도큐먼트에서 css 선택자가 가리키는 데이터를 파싱한다.
+	 * @param uri
+	 * @param cssSelector
 	 * @return
 	 */
-	public Map<String, String> parsing(String url, String cssSelector) {
-		Map<String, String> parsedMap = new LinkedHashMap<>();
-		Elements elements = getDocument(url).select(cssSelector);
-		
-		for(int i = 0; i < elements.size(); i++) {
-			String contents_name = elements.get(i).text();
-			String contents_url = elements.get(i).attr("abs:href");
-			parsedMap.put(contents_url, contents_name);
-		}	
-		
-		return parsedMap;
+	public Elements getElements(String uri, String cssSelector) {
+		Elements elements = getDocument(uri).select(cssSelector);
+		return elements;
 	}
+
 }

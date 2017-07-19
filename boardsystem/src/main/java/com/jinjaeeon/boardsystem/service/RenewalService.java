@@ -25,19 +25,20 @@ public class RenewalService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	HTMLParserUtils parser;
-	BoardStorageManager storageManager;
-	JsonFileManager jsonFile;
+	private BoardStorageManager storageManager;
+	private JsonFileManager jsonFile;
 	
 	@Value("${file.directory}")
 	private String baseDirectory;
 	
 	@Autowired
-	FCMService fcm;
+	private FCMService fcm;
+	
+	@Autowired
+	private HTMLParserService parser;
 
 	@PostConstruct
 	public void init() {
-		parser = new HTMLParserUtils();
 		storageManager = BoardStorageManager.getInstance();
 		jsonFile = JsonFileManager.getInstance(baseDirectory);
 	}

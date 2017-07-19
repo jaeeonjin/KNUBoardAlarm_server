@@ -15,6 +15,7 @@ import com.jinjaeeon.boardsystem.api.board.dao.BoardDAO;
 import com.jinjaeeon.boardsystem.api.board.dto.BoardDTO;
 import com.jinjaeeon.boardsystem.common.util.HTMLParserUtils;
 import com.jinjaeeon.boardsystem.manager.JsonFileManager;
+import com.jinjaeeon.boardsystem.service.HTMLParserService;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -31,23 +32,24 @@ public class BoardServiceImpl implements BoardService {
 	@Value("${board.lecture}")
 	private String lectureBoard;
 
-	private HTMLParserUtils parser;
+	@Autowired
+	private HTMLParserService parser;
+	
 	private JsonFileManager jsonFile;
 	private final Logger log = LoggerFactory.getLogger(getClass()); 
 	
 	@PostConstruct
 	public void init() {
 		jsonFile = JsonFileManager.getInstance(baseDirectory);
-		parser = new HTMLParserUtils();
 	}
-	
+
 	@Override
 	public List<BoardDTO> selectAll() {
 		@SuppressWarnings("unchecked")
 		List<BoardDTO> list = (List<BoardDTO>) boardDAO.selectAll();
 
 		if( list.size() == 0 )
-			log.error("가져올 데이터가 없습니다.");
+			log.warn("가져올 데이터가 없습니다.");
 
 		return list;
 	}
@@ -72,7 +74,7 @@ public class BoardServiceImpl implements BoardService {
 
 		if(result == 0)
 			log.error("지울 게시판 데이터가 없습니다. boardURI : " + board.getUri());
-		
+
 		else {
 			jsonFile.deleteFile(board.getUri());
 		}
@@ -96,45 +98,40 @@ public class BoardServiceImpl implements BoardService {
 		board.setType(boardType);
 
 		try {
-			try {
-				result = boardDAO.insert(board);
-				System.err.println(board);
-			} catch(Exception e) {
-				log.error("외래키 제약 조건 ERROR");
-				log.error("ID : " + board.getId() + " Board_URI : " + board.getUri() );
-				e.printStackTrace();
-				throw e;
-			}
-
-			// 디렉토리 내에 게시판 파일이 존재하지 않으면
-			// 1. 게시판 파싱
-			// 2. 데이터 파일 출력
-			// 3. // 디렉토리 감시 중 파일 추가될 때 자동으로 메모리에 추가 (물론, 메모리에 존재하지 않을 떄)
-			try {
-				boolean flag = jsonFile.isFile(board.getUri());
-				if( !flag ) {
-					// #1
-					Map<String, String> boardMap = parser.parsing(board.getUri(), board.getType());
-					board.setData(boardMap);
-
-					// #2
-					jsonFile.writeJSONFile(board.getUri(), board);
-				}
-			} catch(Exception e) {
-				log.error("게시판 파싱 OR 파일 출력 오류");
-				e.printStackTrace();
-				
-				// 롤백
-				if( jsonFile.isFile(board.getUri())) {
-					jsonFile.deleteFile(board.getUri());
-				}
-				throw e;
-			}
+			result = boardDAO.insert(board);
+			System.err.println(board);
+		} catch(Exception e) {
+			log.error("외래키 제약 조건 ERROR");
+			log.error("ID : " + board.getId() + " Board_URI : " + board.getUri() );
+			e.printStackTrace();
+			throw e;
 		}
-		catch( Exception e ) { 
-			// none
+
+		// 디렉토리 내에 게시판 파일이 존재하지 않으면
+		// 1. 게시판 파싱
+		// 2. 데이터 파일 출력
+		// 3. // 디렉토리 감시 중 파일 추가될 때 자동으로 메모리에 추가 (물론, 메모리에 존재하지 않을 떄)
+		try {
+			boolean flag = jsonFile.isFile(board.getUri());
+			if( !flag ) {
+				// #1
+				Map<String, String> boardMap = parser.parsing(board.getUri(), board.getType());
+				board.setData(boardMap);
+
+				// #2
+				jsonFile.writeJSONFile(board.getUri(), board);
+			}
+		} catch(Exception e) {
+			log.error("게시판 파싱 OR 파일 출력 오류");
+			e.printStackTrace();
+
+			// 롤백
+			if( jsonFile.isFile(board.getUri())) {
+				jsonFile.deleteFile(board.getUri());
+			}
+			throw e;
 		}
-		
+
 		return result;
 	}
 
