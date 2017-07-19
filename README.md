@@ -24,7 +24,8 @@
 - MySQL
 </code></pre>
 ### # Dependencies
-<pre><code>- Library : JSoup
+<pre><code>- JSoup
+- MyBatis
 </code></pre>
 
 <br>
