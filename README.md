@@ -20,8 +20,8 @@
 
 ## 개발환경
 ### # Tools
-<pre><code>- STS(Spring Boot)
-- MySQL
+<pre><code>- IDE : STS(Spring Boot)
+- DB : MySQL
 </code></pre>
 ### # Dependencies
 <pre><code>- JSoup
