@@ -31,7 +31,6 @@ public class BoardDAO extends CommonDAO {
 	 * @return
 	 */
 	public int insert(BoardDTO board) {
-		System.out.println(board);
 		insert("board.insert", board);
 		return (int) selectOne2("board.getResult");
 	}

@@ -38,11 +38,11 @@
 		WHERE delete_flag = "0"
 	</select>
 
- 	<select id="selectAllByToken"  parameterType="String" resultType="com.jinjaeeon.boardsystem.service.fcm.FCMDTO">
+ 	<select id="selectAllByToken"  parameterType="String" resultType="com.jinjaeeon.boardsystem.api.member.dto.FCMDTO">
 		SELECT DISTINCT token, board_name as boardTitle
 		FROM member
 		INNER JOIN member_board
-		WHERE board_uri = #{boardUri};
+		WHERE board_uri = #{boardURI};
 	</select> 
 	
 </mapper>

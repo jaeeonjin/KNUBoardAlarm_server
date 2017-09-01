@@ -1,8 +1,6 @@
 package com.jinjaeeon.boardsystem.common.util;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

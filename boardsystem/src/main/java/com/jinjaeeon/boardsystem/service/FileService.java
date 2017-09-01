@@ -1,4 +1,4 @@
-package com.jinjaeeon.boardsystem.manager;
+package com.jinjaeeon.boardsystem.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,21 +18,21 @@ import com.jinjaeeon.boardsystem.common.util.FileUtils;
 /**
  * (게시판 데이터 전용) JSON 파일 입출력을 수행하는 클래스
  */
-public class JsonFileManager extends FileUtils {
+public class FileService extends FileUtils {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private static JsonFileManager instance;
+	private static FileService instance;
 	private String baseDirectory;
 
-	private JsonFileManager(String directory) {
+	private FileService(String directory) {
 		super(directory);
 		this.baseDirectory = directory;
 	}
 
-	public synchronized static JsonFileManager getInstance(String directory) {
+	public synchronized static FileService getInstance(String directory) {
 		if( instance == null ) {
-			instance = new JsonFileManager(directory);
+			instance = new FileService(directory);
 		}
 		return instance;
 	}

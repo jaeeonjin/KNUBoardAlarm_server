@@ -46,16 +46,15 @@ public class FileUtils {
 	 * @param fileName : 파일 이름
 	 * @param fileType : 파일 확장자 종류
 	 */
-	public void writeFile(String content, String filePath) {
+	public void writeFile(String content, String fileName) {
 		FileWriter file;
 		try {
-			file = new FileWriter(baseDirectory+filePath);
+			file = new FileWriter(baseDirectory+fileName);
 			file.write(content);
 			file.flush();
 			file.close();
 		} catch(IOException e) {
-			log.error("파일 쓰기 ERROR : " + filePath);
-			log.error(e.getMessage());
+			log.error("파일 쓰기 ERROR : " + fileName);
 			e.printStackTrace();
 		}
 	}
@@ -94,40 +93,13 @@ public class FileUtils {
 		if( !flag ) {
 			log.error("존재하지 않는 파일입니다.");
 		}
-		
+
 		return flag;
 	}
 
 	public boolean isFile(String filePath) {
 		File file = new File(baseDirectory+filePath);
 		return file.isFile();
-	}
-
-	/**
-	 * 디렉토리 모니터링 WatchKey 객체 반환 메소드
-	 */
-	public WatchKey getWatchKey() {
-		WatchService watchService = null;
-		WatchKey watchKey = null;
-		Path path = null;
-
-		try {
-			watchService = FileSystems.getDefault().newWatchService();
-
-			//모니터링을 원하는 디렉토리 Path를 얻는다.
-			path = Paths.get(baseDirectory);    
-
-			//모니터링 서비스를 할 path에 의해 파일로케이션을 등록
-			watchKey = path.register(watchService, 
-					StandardWatchEventKinds.ENTRY_CREATE,
-					StandardWatchEventKinds.ENTRY_MODIFY,
-					StandardWatchEventKinds.ENTRY_DELETE);
-		} catch (IOException e) {
-			log.error("WatchService 오류 " + e.getMessage());
-			e.printStackTrace();
-		}
-
-		return watchKey;
 	}
 
 }
